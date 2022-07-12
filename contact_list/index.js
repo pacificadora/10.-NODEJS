@@ -7,6 +7,19 @@ const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+app.use(express.urlencoded());
+
+//creating middleware1
+app.use(function(req, res, next){
+    console.log('MW1 is called');
+    next();
+})
+
+// creating middleware2
+app.use(function(req, res, next){
+    console.log('MW2 is called');
+    next();
+})
 
 
 var contactList = [
@@ -41,7 +54,15 @@ app.get('/', function(req, res){
 
 //flow -> form filled -> submit -> action route(create-contact in this case) -> redirect(practice in this case).
 app.post('/create-contact', function(req, res){
-    return res.redirect('/practice');
+    //return res.redirect('/practice');
+    // console.log(req.body.name);
+    // console.log(req.body.phone);
+    // console.log(req.body);
+    contactList.push({
+        name: req.body.name,
+        phone: req.body.phone,
+    })
+    return res.redirect('/');
 })
 
 
