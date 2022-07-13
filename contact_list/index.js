@@ -8,18 +8,19 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded());
+app.use(express.static('assets'));
 
 //creating middleware1
-app.use(function(req, res, next){
-    console.log('MW1 is called');
-    next();
-})
+// app.use(function(req, res, next){
+//     console.log('MW1 is called');
+//     next();
+// })
 
-// creating middleware2
-app.use(function(req, res, next){
-    console.log('MW2 is called');
-    next();
-})
+// // creating middleware2
+// app.use(function(req, res, next){
+//     console.log('MW2 is called');
+//     next();
+// })
 
 
 var contactList = [
@@ -50,6 +51,10 @@ app.get('/', function(req, res){
     });
 })
 
+
+app.get('/delete-contact/', function(req, res){
+    console.log(req.query);
+})
 
 
 //flow -> form filled -> submit -> action route(create-contact in this case) -> redirect(practice in this case).

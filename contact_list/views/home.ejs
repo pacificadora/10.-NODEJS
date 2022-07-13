@@ -7,17 +7,29 @@
     <title>
         <%= title %>
     </title>
+    <script src="https://kit.fontawesome.com/bfccf2635b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/home.css">
 </head>
 <body>
-    <h2>Contact List</h2>
+    <h2 id="page-heading">
+        <i class="fa-solid fa-address-book"></i>
+        Contact List
+    </h2>
 
-    <div>
+    <div class="contact-list-container">
         <ul>
             <% for(let i of contact_list){%>
                 <li>
-                    <p><%= i.name %></p>
-                    <p><%= i.phone %></p>
+                    <div class="single-contact">
+                        <p><%= i.name %></p>
+                        <p><%= i.phone %></p>
+                    </div>
                 </li>
+                <div class="delete-button">
+                    <a href="/delete-contact/?phone=<%= i.phone %>">
+                        <i class="fa-solid fa-calendar-xmark"></i>
+                    </a>
+                </div>
             <%} %>
         </ul>
     </div>
@@ -28,5 +40,7 @@
 
         <button type="submit"> Add Contact </button>
     </form>
+
+    <script src="./js/home.js" type="text/javascript"></script>
 </body>
 </html>
