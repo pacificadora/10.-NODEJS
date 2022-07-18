@@ -2,6 +2,12 @@ const express = require('express');
 const path = require('path');
 //path is an inbuilt module in nodejs hence there is no need to install path
 const port = 8000;
+
+//db will be used to access database.
+const db = require('./config/mongoose');
+
+//now this contact will be used for populating the data on databse.
+const Contact = require('./models/contacts');
 const app = express();
 
 
@@ -45,15 +51,42 @@ var contactList = [
 app.get('/', function(req, res){
     // console.log(__dirname);
     // res.send("<h2> cool, it is running now! </h2>")
-    res.render('home', {
-        title: "Contact List",
-        contact_list: contactList,
-    });
+
+    //fetching the contacts from db
+    Contact.find({}, function(err, contacts){
+        if(err){
+            console.log("error in fetching the contact");
+            return;
+        }
+        res.render('home', {
+            title: "Contact List",
+            contact_list: contacts
+            //contact_list: contactList,
+        });
+
+    })
+
+    // res.render('home', {
+    //     title: "Contact List",
+    //     contact_list: contacts
+    //     //contact_list: contactList,
+    // });
 })
 
 
 app.get('/delete-contact/', function(req, res){
-    console.log(req.query);
+    //get the id from the url
+    let id = req.query._id;
+    console.log(id);
+    //find the contact in db and delete it
+    Contact.findByIdAndDelete(id, function(err){
+        if(err){
+            console.log("error in deleteing the contact from the db");
+            return;
+        }
+        return res.redirect('back');
+    })
+
 })
 
 
@@ -63,11 +96,25 @@ app.post('/create-contact', function(req, res){
     // console.log(req.body.name);
     // console.log(req.body.phone);
     // console.log(req.body);
-    contactList.push({
+    
+    
+    // contactList.push({
+    //     name: req.body.name,
+    //     phone: req.body.phone,
+    // })
+
+    Contact.create({
         name: req.body.name,
         phone: req.body.phone,
+    }, function(err, newContact){
+        if(err){
+            console.log("error in creating contact");
+            return;
+        }
+        console.log('************', newContact);
+        return res.redirect('back');
     })
-    return res.redirect('/');
+    // return res.redirect('/');
 })
 
 
