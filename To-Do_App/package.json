@@ -1,0 +1,17 @@
+{
+  "name": "to-do_app",
+  "version": "1.0.0",
+  "description": "this is a daily task tracker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "social"
+  ],
+  "author": "Aman Singhal",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
