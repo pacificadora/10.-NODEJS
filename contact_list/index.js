@@ -62,7 +62,6 @@ app.get('/', function(req, res){
             contact_list: contacts
             //contact_list: contactList,
         });
-
     })
 
     // res.render('home', {
@@ -75,7 +74,7 @@ app.get('/', function(req, res){
 
 app.get('/delete-contact/', function(req, res){
     //get the id from the url
-    let id = req.query._id;
+    let id = req.query.id;
     console.log(id);
     //find the contact in db and delete it
     Contact.findByIdAndDelete(id, function(err){
