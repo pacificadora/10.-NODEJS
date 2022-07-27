@@ -28,7 +28,6 @@ app.use(express.static('assets'));
 //     next();
 // })
 
-
 var contactList = [
     {
         name: "Aman",
