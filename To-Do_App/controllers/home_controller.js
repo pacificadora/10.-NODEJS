@@ -23,12 +23,15 @@ module.exports.delete = function(req, res){
     let id = req.query.id;
     console.log(id);
 
-    Task.findByIdAndDelete(id, function(err){
-        if(err){
-            console.log("error in deleteing the contact"); 
-            return;
-        }
-        return res.redirect('/');
+    let fillCheckBox = Object.keys(id).length;
 
-    })
+    for(let i=0; i<fillCheckBox; i++){
+        Task.findByIdAndDelete(Object.keys(id)[i], function(err){
+            if(err){
+                console.log("error in deleteing the contact"); 
+                return;
+            }
+        })
+    }
+    return res.redirect('/');
 }
