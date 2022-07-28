@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/bfccf2635b.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../assets/css/style-home.css">
+    <link rel="stylesheet" href="./css/style-home.css">
     <title><%= title %></title>
 </head>
 <body>
-    <h1><%= title %></h1>
+    <h1 class="heading"><%= title %></h1>
     <div class="container">
         <form action="/add-task" method="POST">
             <div class="card">
@@ -22,7 +22,6 @@
                 <input type="text" name="desc" class="form-control" placeholder="Write Down the Description ?" required>
             </div>
             <div>
-
                 <div class="category-card">
                     <span class="text-muted">CATEGORY</span>
                 </div>
@@ -30,7 +29,6 @@
                 <div class="due-date-card">
                     <span class="text-muted">DUE-DATE</span>
                 </div>
-
             </div>
 
             <div>
@@ -61,6 +59,7 @@
 
     <!-- checking if the task list is empty in db -->
     <% if(todo_list.length != 0) { %>
+        <!-- iterating over the task list in the db -->
         <% for(let i of todo_list) { %>
             <div class="card task-card">
                 <div class="checkbox">
@@ -73,27 +72,28 @@
                 <p class="text-muted"><%= i.desc %></p>
                 <p class="text-muted"><i class="far fa-calendar-alt"></i> <%= i.date %></p>
             </div>
-
-            <!-- *********giving colors to baddges according to their category******** -->
-            <% if(i.category=='Personal') {%>
-                <h4><span class="badge badge-info"> <%= i.category %> </span></h4>
-            <% }%>
-            <% if(i.category=='Professional') {%>
-                <h4><span class="badge badge-success"> <%= i.category %> </span></h4>
-            <% }%>
-            <% if(i.category=='Academics') {%>
-                <h4><span class="badge badge-primary"> <%= i.category %> </span></h4>
-            <% }%>
-            <% if(i.category=='Social') {%>
-                <h4><span class="badge badge-dark"> <%= i.category %> </span></h4>
-            <% }%>
-            <% if(i.category=='Other') {%>
-                <h4><span class="badge badge-default"> <%= i.category %> </span></h4>
-            <% }%>
-            <div class="delete-button">
-                <a href="/delete-task/?id=<%= i._id %>">
-                    <i class="fa-solid fa-calendar-xmark"></i>
-                </a>
+            <div class="tag-box">
+                <!-- *********giving colors to baddges according to their category******** -->
+                <% if(i.category=='Personal') {%>
+                    <h4><span class="badge badge-info"> <%= i.category %> </span></h4>
+                <% }%>
+                <% if(i.category=='Professional') {%>
+                    <h4><span class="badge badge-success"> <%= i.category %> </span></h4>
+                <% }%>
+                <% if(i.category=='Academics') {%>
+                    <h4><span class="badge badge-primary"> <%= i.category %> </span></h4>
+                <% }%>
+                <% if(i.category=='Social') {%>
+                    <h4><span class="badge badge-dark"> <%= i.category %> </span></h4>
+                <% }%>
+                <% if(i.category=='Other') {%>
+                    <h4><span class="badge badge-default"> <%= i.category %> </span></h4>
+                <% }%>
+                <div class="delete-button">
+                    <a href="/delete-task/?id=<%= i._id %>">
+                        <i class="fa-solid fa-calendar-xmark"></i>
+                    </a>
+                </div>
             </div>
         <% } %>
     <% } %>

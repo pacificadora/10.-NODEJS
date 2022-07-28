@@ -1,15 +1,14 @@
 *{
     margin-bottom: 8px;
+    align-items: center;
 }
 a{
     text-decoration: none;
 }
 body{
-    /* background-color: aquamarine; */
     font-family: 'Ubuntu', sans-serif;
-    /* color: #838383; */
     margin: 0;
-    background-image: url('/images/bg2.jpg');
+    background-image: url('/images/image1.jpg');
     /* background-attachment: ; */
     background-position: center;
     width: 100%;
@@ -49,10 +48,8 @@ body{
     text-align: right;
 }
 
-select{
-}
 
-#container{
+.container{
     margin-left: 30%;
     width: 45%;
     
