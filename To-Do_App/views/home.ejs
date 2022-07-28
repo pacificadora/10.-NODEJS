@@ -12,8 +12,90 @@
     <h1><%= title %></h1>
     <div class="container">
         <form action="/add-task" method="POST">
-            
+            <div class="card">
+                <p>TITLE</p>
+                <input type="text" name="title" class="form-control" placeholder="What's the title ?" required>
+            </div>
+
+            <div class="card">
+                <p>Description</p>
+                <input type="text" name="desc" class="form-control" placeholder="Write Down the Description ?" required>
+            </div>
+            <div>
+
+                <div class="category-card">
+                    <span class="text-muted">CATEGORY</span>
+                </div>
+
+                <div class="due-date-card">
+                    <span class="text-muted">DUE-DATE</span>
+                </div>
+
+            </div>
+
+            <div>
+
+                <div class="category-card">
+                    <select class="custom-select" name="category">
+                        <option value="Personal">Personal</option>
+                        <option value="Professional">Professional</option>
+                        <option value="Academics">Academics</option>
+                        <option value="Social">Social</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="due-date-card">
+                    <input type="date" name="date" required>
+                </div>
+
+            </div>
+
+            <div class="action-button-container">
+                <button type="submit" class="btn btn-success btn-lg">
+                    <i class="fas fa-plus"></i> Add Task</button>
         </form>
     </div>
+
+    <!-- starting the printing of the tasks cards -->
+
+    <!-- checking if the task list is empty in db -->
+    <% if(todo_list.length != 0) { %>
+        <% for(let i of todo_list) { %>
+            <div class="card task-card">
+                <div class="checkbox">
+                    <input type="checkbox" class="select-task" id="checkbox" name="<%= i._id%>">
+                </div>
+            </div>
+
+            <div class="card-body task-body">
+                <h5 class="card-title "><%= i.title %></h5>
+                <p class="text-muted"><%= i.desc %></p>
+                <p class="text-muted"><i class="far fa-calendar-alt"></i> <%= i.date %></p>
+            </div>
+
+            <!-- *********giving colors to baddges according to their category******** -->
+            <% if(i.category=='Personal') {%>
+                <h4><span class="badge badge-info"> <%= i.category %> </span></h4>
+            <% }%>
+            <% if(i.category=='Professional') {%>
+                <h4><span class="badge badge-success"> <%= i.category %> </span></h4>
+            <% }%>
+            <% if(i.category=='Academics') {%>
+                <h4><span class="badge badge-primary"> <%= i.category %> </span></h4>
+            <% }%>
+            <% if(i.category=='Social') {%>
+                <h4><span class="badge badge-dark"> <%= i.category %> </span></h4>
+            <% }%>
+            <% if(i.category=='Other') {%>
+                <h4><span class="badge badge-default"> <%= i.category %> </span></h4>
+            <% }%>
+            <div class="delete-button">
+                <a href="/delete-task/?id=<%= i._id %>">
+                    <i class="fa-solid fa-calendar-xmark"></i>
+                </a>
+            </div>
+        <% } %>
+    <% } %>
 </body>
 </html>
